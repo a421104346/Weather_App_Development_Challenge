@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+  padding: 50px;
+}
+
+input,
+button {
+  padding: 10px;
+  margin: 10px;
+}
+
+.sunny {
+  background: url("./image/1.jpg");
+  background-size: cover;
+}
+
+.clouds {
+  background: url("./image/2.jpg");
+  background-size: cover;
+}
+
+.rain {
+  background: url("./image/3.jpg");
+  background-size: cover;
+}
+
+.weather-info {
+  margin-top: 20px;
+  font-size: 1.5em;
+}
