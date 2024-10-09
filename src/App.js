@@ -4,6 +4,17 @@ import CountrySelector from "./component/CountrySelector";
 import InputFilter from "./component/InputFilter";
 import InputField from "./component/InputField";
 import WeatherInfo from "./component/WeatherInfo";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBBtn,
+  MDBTypography,
+} from "mdb-react-ui-kit";
 
 function App() {
   const [cityOrZip, setCityOrZip] = useState("");
@@ -45,13 +56,11 @@ function App() {
       );
       const data = await response.json();
 
-      if (
-        data.cod === 200 &&
-        data.weather &&
-        Array.isArray(data.weather) &&
-        data.weather.length > 0
-      ) {
-        setWeather(data);
+      if (data.cod === 200 && data.weather && Array.isArray(data.weather) && data.weather.length > 0) {
+        setWeather({
+          ...data,
+          iconUrl: `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`, // 生成图标 URL
+        });
         setShowError(false);
       } else {
         setError(data.message || "Invalid data format or location not found.");
@@ -93,9 +102,14 @@ function App() {
   };
 
   return (
-    <div className={`App ${getBackgroundClass()}`}>
-      <h1>Weather App</h1>
-
+    <MDBContainer className="d-flex justify-content-center align-items-center" fluid style={{ height: '100vh' }}>
+  <MDBCard className="fixed-card">
+    <MDBCardBody>
+      <MDBCardTitle className="text-center mb-4">
+        Enter City Name or Zip Code
+      </MDBCardTitle>
+      
+      {/* 下拉选择组件 */}
       <InputFilter
         inputType={inputType}
         setInputType={setInputType}
@@ -103,6 +117,7 @@ function App() {
         setError={setError}
       />
 
+      {/* 选择国家组件 */}
       {inputType === "zip" && (
         <CountrySelector
           selectedCountry={country}
@@ -110,6 +125,7 @@ function App() {
         />
       )}
 
+      {/* 输入字段组件 */}
       <InputField
         inputType={inputType}
         value={cityOrZip}
@@ -118,12 +134,30 @@ function App() {
         fetchWeather={fetchWeather}
       />
 
-      <button onClick={fetchWeather}>Search</button>
+      {/* 搜索按钮 */}
+      <div className="text-center">
+        <MDBBtn onClick={fetchWeather} className="mt-3">
+          SEARCH
+        </MDBBtn>
+      </div>
 
-      {showError && error && <p className="error-message">{error}</p>}
+      {/* 错误信息显示 */}
+      {showError && error && (
+        <p className="error-message text-danger text-center mt-3">
+          {error}
+        </p>
+      )}
+    </MDBCardBody>
+  </MDBCard>
 
+  {/* 显示天气信息的卡片 */}
+  {weather && (
+    <MDBCard className="mt-4 fixed-card">
       <WeatherInfo weather={weather} getBackgroundClass={getBackgroundClass} />
-    </div>
+    </MDBCard>
+  )}
+</MDBContainer>
+
   );
 }
 
