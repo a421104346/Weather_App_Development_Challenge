@@ -102,62 +102,64 @@ function App() {
   };
 
   return (
-    <MDBContainer className="d-flex justify-content-center align-items-center" fluid style={{ height: '100vh' }}>
-  <MDBCard className="fixed-card">
-    <MDBCardBody>
-      <MDBCardTitle className="text-center mb-4">
-        Enter City Name or Zip Code
-      </MDBCardTitle>
-      
-      {/* 下拉选择组件 */}
-      <InputFilter
-        inputType={inputType}
-        setInputType={setInputType}
-        setCityOrZip={setCityOrZip}
-        setError={setError}
-      />
-
-      {/* 选择国家组件 */}
-      {inputType === "zip" && (
-        <CountrySelector
-          selectedCountry={country}
-          setSelectedCountry={setCountry}
-        />
-      )}
-
-      {/* 输入字段组件 */}
-      <InputField
-        inputType={inputType}
-        value={cityOrZip}
-        setValue={setCityOrZip}
-        setError={setError}
-        fetchWeather={fetchWeather}
-      />
-
-      {/* 搜索按钮 */}
-      <div className="text-center">
-        <MDBBtn onClick={fetchWeather} className="mt-3">
-          SEARCH
-        </MDBBtn>
-      </div>
-
-      {/* 错误信息显示 */}
-      {showError && error && (
-        <p className="error-message text-danger text-center mt-3">
-          {error}
-        </p>
-      )}
-    </MDBCardBody>
-  </MDBCard>
-
-  {/* 显示天气信息的卡片 */}
-  {weather && (
-    <MDBCard className="mt-4 fixed-card">
-      <WeatherInfo weather={weather} getBackgroundClass={getBackgroundClass} />
-    </MDBCard>
-  )}
-</MDBContainer>
-
+    <MDBContainer className="d-flex justify-content-center align-items-center" style={{ height: "100vh",width: "100vw" }}>
+    <MDBRow className="justify-content-center" style={{ width: "90vw", height: "80vh" }}>
+      <MDBCol lg="6" md="8" sm="8" xs="4">
+        <MDBCard className="fixed-card">
+          <MDBCardBody>
+            <MDBCardTitle className="text-center mb-4">
+              Enter City Name or Zip Code
+            </MDBCardTitle>
+  
+            <InputFilter
+              inputType={inputType}
+              setInputType={setInputType}
+              setCityOrZip={setCityOrZip}
+              setError={setError}
+            />
+  
+            {inputType === "zip" && (
+              <CountrySelector
+                selectedCountry={country}
+                setSelectedCountry={setCountry}
+              />
+            )}
+  
+            <InputField
+              inputType={inputType}
+              value={cityOrZip}
+              setValue={setCityOrZip}
+              setError={setError}
+              fetchWeather={fetchWeather}
+            />
+  
+            <div className="text-center">
+              <MDBBtn onClick={fetchWeather} className="mt-3" color="primary">
+                SEARCH
+              </MDBBtn>
+            </div>
+  
+            {showError && error && (
+              <p className="error-message text-danger text-center mt-3">
+                {error}
+              </p>
+            )}
+          </MDBCardBody>
+        </MDBCard>
+      </MDBCol>
+    </MDBRow>
+  
+    {weather && (
+      <MDBRow className="justify-content-center mt-4">
+        <MDBCol lg="12" md="12" sm="12" xs="12">
+          <MDBCard className="fixed-card">
+            <WeatherInfo weather={weather} getBackgroundClass={getBackgroundClass} />
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
+    )}
+  </MDBContainer>
+  
   );
 }
 
