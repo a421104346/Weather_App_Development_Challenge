@@ -1,5 +1,6 @@
 import React from "react";
-
+// This component is to recognize which type of input user want to do,
+//since zip code is not unique id, one zip code may present two different place.
 function InputFilter({ inputType, setInputType, setCityOrZip, setError }) {
   return (
     <div className="filter">

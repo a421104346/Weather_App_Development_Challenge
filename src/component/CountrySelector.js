@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-// 创建国家选择器组件
+
 function CountrySelector({ selectedCountry, setSelectedCountry }) {
-  // ISO 3166 国家代码及其名称
+  // ISO 3166 countries code
   const countries = {
     AF: "Afghanistan",
     AX: "Åland Islands",
@@ -205,6 +205,7 @@ function CountrySelector({ selectedCountry, setSelectedCountry }) {
     ZW: "Zimbabwe",
   };
 
+//The filter handle which country's zip code that user select
   return (
     <div className="filter">
       <label htmlFor="country">Select Country: </label>
