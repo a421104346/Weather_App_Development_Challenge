@@ -1,2 +1,0 @@
-# Weather_App_Development_Challenge
-Created with CodeSandbox
