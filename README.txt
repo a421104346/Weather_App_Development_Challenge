@@ -11,7 +11,7 @@ Forexample city name: New York,please dont type newyourk.
 
 The API I used: OpenWeatherMap https://openweathermap.org/api
 The library I used: MDB https://mdbootstrap.com/docs/standard/getting-started/installation/
-The Server I used: AWS
+The Server I used: AWS Amplify
 
 My Github repository: https://github.com/a421104346/Weather_App_Development_Challenge
-AWS atatic website: http://reacttt-weather-app.s3-website-ap-southeast-2.amazonaws.com/
+AWS atatic website: https://main.d131zjotu2of9u.amplifyapp.com/
