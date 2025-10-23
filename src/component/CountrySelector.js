@@ -205,12 +205,13 @@ function CountrySelector({ selectedCountry, setSelectedCountry }) {
     ZW: "Zimbabwe",
   };
 
-//The filter handle which country's zip code that user select
+// Filter handle which country's zip code that user select
   return (
-    <div className="filter">
-      <label htmlFor="country">Select Country: </label>
+    <div className="mb-3">
+      <label htmlFor="country" className="form-label">Select Country/Region: </label>
       <select
         id="country"
+        className="form-select"
         value={selectedCountry}
         onChange={(e) => setSelectedCountry(e.target.value)}
       >

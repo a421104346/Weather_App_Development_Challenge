@@ -1,21 +1,40 @@
 import React from "react";
-// This component is to recognize which type of input user want to do,
-//since zip code is not unique id, one zip code may present two different place.
-function InputFilter({ inputType, setInputType, setCityOrZip, setError }) {
+import { MDBSelect } from "mdb-react-ui-kit";
+import { INPUT_TYPES } from "../constants";
+
+/**
+ * Input type selector component
+ * Allows users to choose search method: city name or postal code
+ */
+function InputFilter({ inputType, setInputType, onInputTypeChange }) {
+  const options = [
+    { text: 'City Name', value: INPUT_TYPES.CITY },
+    { text: 'Postal Code', value: INPUT_TYPES.ZIP }
+  ];
+
+  const handleChange = (value) => {
+    setInputType(value);
+    if (onInputTypeChange) {
+      onInputTypeChange();
+    }
+  };
+
   return (
-    <div className="filter">
-      <label htmlFor="inputType">Choose input type: </label>
+    <div className="mb-3">
+      <label htmlFor="inputType" className="form-label">
+        Choose search method:
+      </label>
       <select
         id="inputType"
+        className="form-select"
         value={inputType}
-        onChange={(e) => {
-          setInputType(e.target.value);
-          setCityOrZip("");
-          setError("");
-        }}
+        onChange={(e) => handleChange(e.target.value)}
       >
-        <option value="city">City Name</option>
-        <option value="zip">Zip Code</option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.text}
+          </option>
+        ))}
       </select>
     </div>
   );
